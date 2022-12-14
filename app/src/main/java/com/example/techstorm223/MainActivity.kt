@@ -1,13 +1,17 @@
 package com.example.techstorm223
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.AnimatedContentScope.SlideDirection.Companion.End
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+
+
 
 import androidx.compose.foundation.lazy.LazyColumn
 
@@ -44,6 +48,10 @@ import com.example.techstorm223.R
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.items
+import androidx.compose.ui.platform.LocalContext
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -206,7 +214,13 @@ fun DrawerItem(item: NavigationItem, selected: Boolean, onItemClick: (Navigation
     }
 
 }
-
+data  class EventData(
+    val id:Long,
+    val title :String,
+    val rating : Float,
+    val desc :String,
+    val imgUri:Int
+)
 @Composable
 fun HomeScreen(navController: NavHostController){
 
@@ -217,7 +231,7 @@ fun HomeScreen(navController: NavHostController){
             Box(
                 modifier = Modifier
 
-                    .clip(RectangleShape)
+                    .clip(RoundedCornerShape(30.dp))
                     .fillMaxWidth()
                     .background(Color.Red)
                     .clickable {
@@ -229,6 +243,159 @@ fun HomeScreen(navController: NavHostController){
                         id = R.drawable.image_1
                     ), contentDescription = "Null"
                 )
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .background(color = Color.Gray)
+                        .fillMaxWidth()
+                ) {
+
+                    Text(
+                        modifier = Modifier.align(Alignment.BottomCenter),
+                        text = "Brain Teasers",
+                        fontSize = 26.sp
+
+                    )
+                    Spacer(Modifier.size(20.dp))
+
+                }
+            }
+            Spacer(Modifier.size(20.dp))
+            Box(
+                modifier = Modifier
+
+                    .clip(RoundedCornerShape(30.dp))
+                    .fillMaxWidth()
+                    .background(Color.Red)
+                    .clickable {
+                        navController.navigate(NavigationItem.Rovers_List.route)
+                    }
+            ) {
+                Image(
+                    painter = painterResource(
+                        id = R.drawable.image_2
+                    ), contentDescription = "Null"
+                )
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .background(color = Color.Gray)
+                        .fillMaxWidth()
+                ) {
+
+                    Text(
+                        modifier = Modifier.align(Alignment.BottomCenter),
+                        text = "Idea Presentation",
+                        fontSize = 26.sp
+
+                    )
+                    Spacer(Modifier.size(20.dp))
+
+                }
+            }
+
+            Spacer(Modifier.size(20.dp))
+            Box(
+                modifier = Modifier
+
+                    .clip(RoundedCornerShape(30.dp))
+                    .fillMaxWidth()
+                    .background(Color.Red)
+                    .clickable {
+                        navController.navigate(NavigationItem.Rovers_List.route)
+                    }
+            ) {
+                Image(
+                    painter = painterResource(
+                        id = R.drawable.image_2
+                    ), contentDescription = "Null"
+                )
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .background(color = Color.Gray)
+                        .fillMaxWidth()
+                ) {
+
+                    Text(
+                        modifier = Modifier.align(Alignment.BottomCenter),
+                        text = "Idea Presentation",
+                        fontSize = 26.sp
+
+                    )
+                    Spacer(Modifier.size(20.dp))
+
+                }
+            }
+
+
+
+            Box(
+                modifier = Modifier
+
+                    .clip(RoundedCornerShape(30.dp))
+                    .fillMaxWidth()
+                    .background(Color.Red)
+                    .clickable {
+                        navController.navigate(NavigationItem.Rovers_List.route)
+                    }
+            ) {
+                Image(
+                    painter = painterResource(
+                        id = R.drawable.image_2
+                    ), contentDescription = "Null"
+                )
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .background(color = Color.Gray)
+                        .fillMaxWidth()
+                ) {
+
+                    Text(
+                        modifier = Modifier.align(Alignment.BottomCenter),
+                        text = "Idea Presentation",
+                        fontSize = 26.sp
+
+                    )
+                    Spacer(Modifier.size(20.dp))
+
+                }
+            }
+
+
+
+            Box(
+                modifier = Modifier
+
+                    .clip(RoundedCornerShape(30.dp))
+                    .fillMaxWidth()
+                    .background(Color.Red)
+                    .clickable {
+                        navController.navigate(NavigationItem.Rovers_List.route)
+                    }
+            ) {
+                Image(
+                    painter = painterResource(
+                        id = R.drawable.image_2
+                    ), contentDescription = "Null"
+                )
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .background(color = Color.Gray)
+                        .fillMaxWidth()
+                ) {
+
+                    Text(
+                        modifier = Modifier.align(Alignment.BottomCenter),
+                        text = "Idea Presentation",
+                        fontSize = 26.sp
+
+                    )
+                    Spacer(Modifier.size(20.dp))
+
+                }
             }
             Box(
                 modifier = Modifier
@@ -242,23 +409,7 @@ fun HomeScreen(navController: NavHostController){
             ) {
                 Image(
                     painter = painterResource(
-                        id = R.drawable.image_1
-                    ), contentDescription = "Null"
-                )
-            }
-            Box(
-                modifier = Modifier
-
-                    .clip(RectangleShape)
-                    .fillMaxWidth()
-                    .background(Color.Red)
-                    .clickable {
-                        navController.navigate(NavigationItem.Rovers_List.route)
-                    }
-            ) {
-                Image(
-                    painter = painterResource(
-                        id = R.drawable.image_1
+                        id = R.drawable.image_3
                     ), contentDescription = "Null"
                 )
             }
@@ -360,7 +511,6 @@ fun HomeScreen(navController: NavHostController){
             }
         }
     }
-
 }
 
 
@@ -503,10 +653,27 @@ fun TeamScreen(){
     }
 }
 
+fun getJsonDataFromAsset(context: Context, data: String):String {
+    return context.assets.open(data).bufferedReader().use { it.readText() }
+
+}
+data  class EventDomainData(
+    val id:Long,
+    val title :String,
+    val rating : Float,
+    val desc :String,
+    val imgUri:Int
+)
+
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DevelopersScreen() {
-
+    val context = LocalContext.current
+    val dataFileString = getJsonDataFromAsset(context,"DevList.json")
+    val gson = Gson()
+    val gridSampleType = object : TypeToken<List<EventDomainData>>(){}.type
+    val DevData : List<EventDomainData> = gson.fromJson(dataFileString,gridSampleType)
     /*Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -515,9 +682,10 @@ fun DevelopersScreen() {
             .padding(20.dp) */
     LazyVerticalGrid(cells = GridCells.Fixed(2)){
 
-            items(4) {
 
-                   Card(
+            items(DevData) {data->
+                    DataItem(data)
+                   /*Card(
 
                    ) {
                        val imageModifier = Modifier
@@ -574,11 +742,34 @@ fun DevelopersScreen() {
 
                         }
                     }
-
+*/
             }
          }
         }
-    
+@Composable
+fun DataItem(data : EventDomainData){
+    Card(
+        modifier=Modifier.padding(5.dp,5.dp,5.dp,5.dp)
+    ) {
+        val imageModifier = Modifier
+            .size(250.dp)
+
+        Image(
+            painter = painterResource(id = R.drawable.image_1),
+            contentDescription = null,
+            modifier = imageModifier
+        )
+        Column(modifier = Modifier.padding(5.dp)) {
+            Box(modifier = Modifier) {
+                Text("${data.title}", fontWeight = FontWeight.W700)
+                Text("${data.desc}")
+                Text("${data.rating}", fontWeight = FontWeight.W300)
+            }
+        }
+    }
+    Spacer(modifier = Modifier.size(5.dp))
+
+}
         /*Card(
 
         ) {

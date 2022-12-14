@@ -240,8 +240,46 @@ fun ResultsScreen(){
 
     }
 }
+data  class SponcersData(
+    val imgUri:Int
+)
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
+fun SponcersScreen(){
+    val sponcersvals = listOf(
+        SponcersData(R.drawable.image_1),
+        SponcersData(R.drawable.image_2),
+        SponcersData(R.drawable.image_3),
+        SponcersData(R.drawable.image_4),
+        SponcersData(R.drawable.image_5),
+    )
+    LazyVerticalGrid(cells = GridCells.Fixed(2)){
+
+        items(sponcersvals) {data->
+            SponcerItem(data)
+
+        }
+    }
+}
+@Composable
+fun SponcerItem(data : SponcersData){
+    Card(
+        modifier=Modifier.padding(0.dp,0.dp,0.dp,0.dp)
+    ) {
+        val imageModifier = Modifier
+            .size(250.dp)
+
+        Image(
+            painter = painterResource(id = data.imgUri),
+            contentDescription = null,
+            modifier = imageModifier
+        )
+    }
+    Spacer(modifier = Modifier.size(5.dp))
+
+}
+/*@Composable
 fun SponcersScreen(){
     Column(
         modifier = Modifier
@@ -259,7 +297,7 @@ fun SponcersScreen(){
         )
 
     }
-}
+}*/
 
 @Composable
 fun ShareScreen(){
@@ -571,9 +609,9 @@ fun DataItem(data : EventDomainData){
         )
         Column(modifier = Modifier.padding(5.dp)) {
             Box(modifier = Modifier) {
-                Text("${data.title}", fontWeight = FontWeight.W700)
-                Text("${data.desc}")
-                Text("${data.rating}", fontWeight = FontWeight.W300)
+                Text("${data.title}", fontWeight = FontWeight.W300)
+              //  Text("${data.desc}")
+
             }
         }
     }
